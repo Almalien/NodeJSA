@@ -1,17 +1,12 @@
-var express  = require("express"),
-    app      = express(),
-    http     = require("http"),
-    server   = http.createServer(app),
-    mongoose = require('mongoose');
-    bodyParser = require('body-parser');
-    methodOverride = require("method-override");
+var express         = require("express"),
+    app             = express(),
+    bodyParser      = require("body-parser"),
+    methodOverride  = require("method-override"),
+    mongoose        = require('mongoose');
 
 
 //conexion db
- mongoose.connect('mongodb://localhost/games', function(err, res) {
-  if(err) {
-    console.log('ERROR: connecting to Database. ' + err);
-  }
+ 
   
 
 //middleware
@@ -19,6 +14,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
+
+// importar modelos y controladores
+var models     = require('./models/game')(app, mongoose);
+var GameCtrl = require('./controllers/games');
 
 //example route
 var router = express.Router();
@@ -32,8 +31,8 @@ app.use(router);
 var games = express.Router();
 
 games.route('/games')
-.get(GameCtrl.findAllGames)
-.post(GameCtrl.addGame);
+    .get(GameCtrl.findAllGames)
+    .post(GameCtrl.addGame);
 
 games.route('/games/:id')
   .get(GameCtrl.findById)
@@ -42,7 +41,7 @@ games.route('/games/:id')
 
 app.use('/api', games);
 
-})
+
 
 //Start server
 app.listen(3000, function() {

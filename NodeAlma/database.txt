@@ -1,0 +1,11 @@
+db.product.insert([
+
+{ "product_name" : "Resident Evil 6", "price" : "$599", "genre" : "Dramatic survival horror" ,"platform" : "PC Game" },
+
+{ "product_name" : "Bioshock Collection", "price" : "$849", "genre" : "FPS" ,"platform" : "PS4 Game" },
+
+{ "product_name" : "Fallout 4 VR", "price" : "$1199", "genre" : "Action role-playing ", "platform" : "PC Game" },
+
+{ "product_name" : "Alice Madness Returns", "price" : "$400", "genre" : "Platform survival horror" ,"platform" : "XBOX 360 Game" }
+
+])
